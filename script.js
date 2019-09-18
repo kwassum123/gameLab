@@ -1,9 +1,14 @@
 // java script for the blackjack game
+
+
+
+
+// sets up initial vars
 var dealNum = 0;
 var playNum = 0;
 var black = document.getElementById("label")
 var person = document.getElementById("player");
- var dealer = document.getElementById("dealer");
+var dealer = document.getElementById("dealer");
 
 document.getElementById("pass").disabled = true;
 document.getElementById("hit").disabled = true;
@@ -37,15 +42,32 @@ var start = function()
     
 };
 
+// auto generated dealer 
 var pass = function()
 {
     
-    // make dealer go unti he >= 15
+    // make dealer go until >= 15
         // while loop
+    while (dealNum<=15)     
+    {
+        var card = math();
+        dealNum=card + dealNum;
+        var strDealNum = dealNum.toString();
+        dealer.innerHTML = strDealNum;
+    
+    }
     
     // compare the player and dealer num
-    
     // project who wins in the title
+    if (playNum>dealNum || dealNum>21)
+    {
+        black.innerHTML="User Won";
+    } 
+    else 
+    {
+        black.innerHTML="Dealer Won";
+    }
+    
     
     // make sure they can click the button until after the game is played / disable ability to play
     document.getElementById("start").disabled = false;
@@ -60,6 +82,28 @@ var pass = function()
     
 };
 
+// connected to the thit button, changes the users number
+var hit= function()
+{
+    // Adds cards to eachother
+    var card = math(); 
+    playNum= card + playNum;
+    var strPlayNum = playNum.toString();
+    player.innerHTML = strPlayNum;
+    
+   //catches if the player goes above 21
+    if (playNum>21) 
+    {
+        // resets the buttons and makes the label
+        document.getElementById("hit").disabled = true;
+        document.getElementById("start").disabled = false;
+        document.getElementById("pass").disabled = true;
+        black.innerHTML="Dealer Won"
+    }
+    
+    
+    
+}
 
 // randomly generates a number from 1-10
 var math = function()
